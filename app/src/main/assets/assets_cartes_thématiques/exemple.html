@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaflet Map with Professional Design</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="leaflet.css" />
+    <script src="leaflet.js"></script>
+    <link rel="stylesheet" href="myStyle.css" />
+</head>
+<body>
+
+<div class="container">
+    <div id="mapid"></div>
+</div>
+
+<div class="legend-horizontal">
+    <div class="legend-title">
+        <span id="hover-value"> </span> Population 2014 in <span id="hover-region">Region</span>
+    </div>
+    <div class="legend-bar">
+        <div class="legend-color" style="background: #b10026;"></div>
+        <div class="legend-color" style="background: #e31a1c;"></div>
+        <div class="legend-color" style="background: #fc4e2a;"></div>
+        <div class="legend-color" style="background: #fd8d3c;"></div>
+        <div class="legend-color" style="background: #fed976;"></div>
+        <div class="legend-color" style="background: #ffeda0;"></div>
+    </div>
+    <div class="legend-labels">
+        <span>5M+</span><span>3M+</span><span>2M+</span><span>800K+</span><span>500K+</span><span>200Ks+</span>
+    </div>
+</div>
+
+<script>
+    var mymap = L.map('mapid').setView([33.808975, -7.045327], 5);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 10,
+        attribution: '© OpenStreetMap'
+    }).addTo(mymap);
+
+    function getColor(ppChange) {
+        return ppChange > 5000000 ? '#b10026' :
+               ppChange > 3000000 ? '#e31a1c' :
+               ppChange > 2000000 ? '#fc4e2a' :
+               ppChange > 800000 ? '#fd8d3c' :
+               ppChange > 500000 ? '#feb24c' :
+               ppChange > 200000 ? '#fed976' :
+                                  '#ffeda0';
+    }
+
+    function style(feature) {
+        return {
+            fillColor: getColor(feature.properties.pop_t),
+            weight: 1,
+            opacity: 1,
+            color: 'white',
+            dashArray: '3',
+            fillOpacity: 0.7
+        };
+    }
+
+    function highlightFeature(e) {
+        var layer = e.target;
+    
+        layer.setStyle({
+            weight: 3,
+            color: '#666',
+            dashArray: '',
+            fillOpacity: 0.9
+        });
+    
+        // Mettre à jour la légende avec la valeur de population et le nom de la région survolée
+        document.getElementById('hover-value').textContent = layer.feature.properties.pop_t;
+        document.getElementById('hover-region').textContent = layer.feature.properties.NAME_2;
+    }
+    
+    function resetHighlight(e) {
+        geoJsonLayer.resetStyle(e.target);
+    
+        // Réinitialiser la légende
+        document.getElementById('hover-value').textContent = 'Population';
+        document.getElementById('hover-region').textContent = 'Region';
+    }
+    
+
+    function onEachFeature(feature, layer) {
+        layer.on({
+            mouseover: highlightFeature,
+            mouseout: resetHighlight
+        });
+    }
+
+    function loadGeoJsonData(geoJsonData) {
+            const geoJsonLayer = L.geoJSON(JSON.parse(geoJsonData), {
+            style: style,
+            onEachFeature: onEachFeature // Ajout de la fonction pour gérer les événements
+        }).addTo(mymap);
+
+        mymap.fitBounds(geoJsonLayer.getBounds());
+    }
+</script>
+</body>
+</html>

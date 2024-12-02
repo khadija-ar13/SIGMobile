@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebView JavaScript Interface Example</title>
+    <script type="text/javascript">
+        function callAndroid() {
+        // Appeler la méthode Java pour afficher un toast
+        Android.showToast("Bonjour depuis JavaScript !");
+        }
+        function receiveDataFromAndroid(data) {
+        // Afficher les données reçues depuis Android
+        document.getElementById("data").innerText = "Données reçues : " + data;
+        }
+    </script>
+</head>
+<body>
+<h1>Intégration WebView Android</h1>
+<button onclick="callAndroid()">Appeler Android</button>
+<p id="data">Données reçues : </p>
+</body>
+</html>

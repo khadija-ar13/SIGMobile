@@ -1,0 +1,84 @@
+/* Structure de la page */
+.container {
+    display: flex;
+    height: 100vh;
+}
+/* Disposition générale */
+.container {
+    display: flex;
+}
+
+#mapid {
+    flex: 1;
+}
+
+
+.radio-group p {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Carte */
+#mapid {
+    flex: 1;
+}
+.legend-horizontal {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    max-width: 700px;
+    background: white;
+    padding: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    border-radius: 8px;
+    text-align: center;
+    z-index: 9000;
+    transition: width 0.3s ease;
+}
+
+.legend-title {
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+}
+
+#hover-value {
+    font-size: 24px;
+    color: #b10026;
+}
+
+.legend-bar {
+    display: flex;
+    height: 15px;
+    margin: 10px 0;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.legend-color {
+    flex: 1;
+}
+
+.legend-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #555;
+    margin-top: 5px;
+}
+
+.legend-labels span {
+    text-align: center;
+    flex: 1;
+}
+
+#hover-info {
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}

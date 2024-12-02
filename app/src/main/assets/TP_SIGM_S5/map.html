@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="leaflet.css">
+    <link rel="stylesheet" href="map.css">
+    <script src="leaflet.js"></script>
+    <title>TP1</title>
+</head>
+<body>
+    <div class="container">
+        <div class="column left">
+            <h1>Recherche d'itinéraire</h1>
+            <form id="route-form" class="form">
+                <label for="start">Coordonnées de départ :</label>
+                <input type="text" id="start" name="start" placeholder="Ex: -6.8498,33.9716" required>
+                <label for="end">Coordonnées d'arrivée :</label>
+                <input type="text" id="end" name="end" placeholder="Ex: -7.5898,33.573" required>
+                <button type="submit">Obtenir l'itinéraire</button>
+            </form>
+        </div>
+        <div class="column right">
+            <div id="mapid"></div>
+        </div>
+    </div>
+    <script src="map.js"></script>
+</body>
+</html>
